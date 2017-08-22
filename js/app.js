@@ -30,7 +30,6 @@ var viewModel = function(map,locationList) {
         });
 
     place.marker.addListener('click', function() {
-          // infowindow.open(map, place.marker);
           if (place.marker.getAnimation() !== null) {
             place.marker.setAnimation(null);
           } else {
