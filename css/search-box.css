@@ -1,0 +1,44 @@
+* {
+  box-sizing: border-box;
+}
+
+.h1, h1 {
+    font-size: 2.5rem;
+    color: white;
+}
+
+body {
+  background: #222;
+  margin: 2em 10em;
+  box-sizing: border-box;
+}
+.searchform {
+  display: block;
+  margin: 0;
+  overflow: hidden;
+  width: 50%;
+}
+label, input {
+  vertical-align: baseline;
+  color: #737373;
+}
+label {
+  margin: 0.125em 0.125em 0 0;
+  float: right;
+  
+}
+input[type="search"] {
+  border: 2px solid #737373;
+  border-width: 0 0 3px;
+  background-color: transparent;
+  font: 22px "Open Sans", sans-serif;
+  padding: 0.125em 0.225em;
+  width: 85%;
+  float: left;
+  
+}
+input[type="search"]:focus {
+  color: #E18728;
+  border-color: #E18728;
+  outline: none;
+}

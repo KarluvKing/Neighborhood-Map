@@ -16,6 +16,9 @@
     <!-- Custom styles for this template -->
     <link href="css/simple-sidebar.css" rel="stylesheet">
 
+    <!-- Custom styles for search box -->
+    <link href="css/search-box.css" rel="stylesheet">
+
     <style>
        #map {
         height: 400px;
@@ -37,6 +40,13 @@
                         Neighborhood Map
                     </a>
                 </li>
+                <form class="searchform group">
+                    <label for="search-box">
+                        <span class="fa fa-2x fa-search"></span>
+                    </label>
+  
+                    <input type="search" id="search-box" placeholder="Search">
+                </form>
                 <div data-bind="foreach: allPlaces">
                 <li>
                     <a href="#" data-bind="text: name"></a>
