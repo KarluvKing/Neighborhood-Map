@@ -21,7 +21,7 @@ var viewModel = function(map,locationList) {
       position: place.latLng,
       animation: google.maps.Animation.DROP,
     };
-    console.log(place);
+   // console.log(place);
 
     place.marker = new google.maps.Marker(markerOptions);
     
@@ -39,6 +39,38 @@ var viewModel = function(map,locationList) {
         });
 
   });
+
+  // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
+  self.doSomething = function(item) { // rename the parameter item, give it a more descriptive name
+  	if (item.marker.getAnimation() !== null) {
+            item.marker.setAnimation(null);
+            item.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+          } else {
+          	item.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
+            item.marker.setAnimation(google.maps.Animation.BOUNCE);
+          };
+	
+	//item.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+
+    
+
+
+    //console.log("click");
+    //console.log(item);
+    //console.log(item.marker);
+    //item.marker.setAnimation(google.maps.Animation.BOUNCE);
+    // activate the marker (bounce/ color change, open info window)
+  };
+
+  // list view item and map marker filter
+  // first, focus on filtering the list view items
+  // ko computed observable
+  // http://knockoutjs.com/documentation/computedObservables.html
+  // ko.utils.arrayFilter
+  // http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html
+  // https://opensoul.org/2011/06/23/live-search-with-knockoutjs/
+  // String indexOf method
+  // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
 
   self.visiblePlaces = ko.observableArray();
 
@@ -65,3 +97,7 @@ google.maps.event.addDomListener(window, 'load', function(){
     var googleMap = createMap();
     ko.applyBindings(new viewModel(googleMap,locationList));
 });
+
+// ajax requests
+// choose a third party api
+// try the third part api ajax requests in a stand alone version first (open a mini project)

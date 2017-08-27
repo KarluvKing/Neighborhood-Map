@@ -48,7 +48,9 @@
                     <input type="search" id="search-box" placeholder="Search">
                 </form>
                 <div data-bind="foreach: allPlaces">
-                <li>
+                <!-- http://knockoutjs.com/documentation/click-binding.html -->
+                <!-- http://knockoutjs.com/documentation/binding-context.html -->
+                <li data-bind="click: $root.doSomething">
                     <a href="#" data-bind="text: name"></a>
                 </li>
                 </div>
