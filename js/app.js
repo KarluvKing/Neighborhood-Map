@@ -70,8 +70,18 @@ var viewModel = function(map,locationList) {
   self.visiblePlaces = ko.observableArray();
 
   self.allPlaces.forEach(function(place) {
-    self.visiblePlaces.push(place);
+  self.visiblePlaces.push(place);
   });
+  
+  Query = ko.observable('');
+
+  self.searchResults = ko.computed(function() {
+    var q = Query();
+    return viewModel.visiblePlaces.filter(function(i) {
+      return i.name.toLowerCase().indexOf(q) >= 0;
+    });
+  });
+
 };
 
 // cria o mapa

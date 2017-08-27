@@ -44,9 +44,9 @@
                     <label for="search-box">
                         <span class="fa fa-2x fa-search"></span>
                     </label>
-                    <input type="search" id="search-box" placeholder="Search">
+                    <input type="search" id="search-box" placeholder="Search" data-bind="value: Query, valueUpdate: 'keyup'" autocomplete="off">
                 </form>
-                <div data-bind="foreach: allPlaces">
+                <div data-bind="foreach: searchResults">
                 <!-- http://knockoutjs.com/documentation/click-binding.html -->
                 <!-- http://knockoutjs.com/documentation/binding-context.html -->
                 <li data-bind="click: $root.doEnableMarker">
