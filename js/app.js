@@ -20,6 +20,7 @@ var viewModel = function(map,locationList) {
       map: self.googleMap,
       position: place.latLng,
       animation: google.maps.Animation.DROP,
+      icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
     };
    // console.log(place);
 
@@ -41,7 +42,7 @@ var viewModel = function(map,locationList) {
   });
 
   // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
-  self.doSomething = function(item) { // rename the parameter item, give it a more descriptive name
+  self.doEnableMarker = function(item) {
   	if (item.marker.getAnimation() !== null) {
             item.marker.setAnimation(null);
             item.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
@@ -49,12 +50,6 @@ var viewModel = function(map,locationList) {
           	item.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
             item.marker.setAnimation(google.maps.Animation.BOUNCE);
           };
-	
-	//item.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
-
-    
-
-
     //console.log("click");
     //console.log(item);
     //console.log(item.marker);
@@ -87,16 +82,15 @@ function createMap() {
     });
 }
 
-google.maps.event.addDomListener(window, 'load', function(){
-    var locationList = [
-       { name: 'New York', latLng: { lat: 40.786998, lng: -73.975664 }, contentString: '<p>teste - New York</p>'},
-       { name: 'New Xpto', latLng: { lat: 42.786998, lng: -77.975664 }, contentString: '<p>teste - New Xpto</p>' },
-       { name: 'San Francisco', latLng: { lat: 37.763061, lng: -122.431935 }, contentString: '<p>teste - San Francisco</p>' },
-       { name: 'Los Angeles', latLng: { lat: 34.079078, lng: -118.242818 }, contentString: '<p>teste - Los Angeles</p>' }
-    ];
-    var googleMap = createMap();
-    ko.applyBindings(new viewModel(googleMap,locationList));
-});
+var locationList = [
+  { name: 'New York', latLng: { lat: 40.786998, lng: -73.975664 }, contentString: '<p>teste - New York</p>'},
+  { name: 'New Xpto', latLng: { lat: 42.786998, lng: -77.975664 }, contentString: '<p>teste - New Xpto</p>' },
+  { name: 'San Francisco', latLng: { lat: 37.763061, lng: -122.431935 }, contentString: '<p>teste - San Francisco</p>' },
+  { name: 'Los Angeles', latLng: { lat: 34.079078, lng: -118.242818 }, contentString: '<p>teste - Los Angeles</p>' }
+  ];
+  
+  var googleMap = createMap();
+  ko.applyBindings(new viewModel(googleMap,locationList));
 
 // ajax requests
 // choose a third party api

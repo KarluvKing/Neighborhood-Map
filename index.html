@@ -44,13 +44,12 @@
                     <label for="search-box">
                         <span class="fa fa-2x fa-search"></span>
                     </label>
-  
                     <input type="search" id="search-box" placeholder="Search">
                 </form>
                 <div data-bind="foreach: allPlaces">
                 <!-- http://knockoutjs.com/documentation/click-binding.html -->
                 <!-- http://knockoutjs.com/documentation/binding-context.html -->
-                <li data-bind="click: $root.doSomething">
+                <li data-bind="click: $root.doEnableMarker">
                     <a href="#" data-bind="text: name"></a>
                 </li>
                 </div>
