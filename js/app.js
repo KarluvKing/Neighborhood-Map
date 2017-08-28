@@ -13,7 +13,8 @@ var viewModel = function(map,locationList) {
     this.latLng = dataObj.latLng;
     this.marker = null;
     this.contentString = dataObj.contentString;
-  }  
+  }
+
 
   self.allPlaces.forEach(function(place) {
     var markerOptions = {
@@ -32,30 +33,60 @@ var viewModel = function(map,locationList) {
 
     place.marker.addListener('click', function() {
           if (place.marker.getAnimation() !== null) {
+            place.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
             place.marker.setAnimation(null);
           } else {
             infowindow.open(map, place.marker);
             place.marker.setAnimation(google.maps.Animation.BOUNCE);
+            place.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
           };
         });
 
   });
 
+
+
+  this.filter = ko.observable();
+
   // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
-  self.doEnableMarker = function(item) {
-  	if (item.marker.getAnimation() !== null) {
-            item.marker.setAnimation(null);
-            item.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
+  this.results = ko.computed(function() {
+    var filter = this.filter();
+    if(!filter) {
+      self.allPlaces;      
+      return this.places;
+    } else {
+      return ko.utils.arrayFilter(self.allPlaces, function(place) {
+        if(place.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
+          console.log('1');
+          //showFilteredMarker(place);
+          console.log(place.marker);
+          return place;
+        } else {
+          //hideFilteredMarker(place);
+          console.log('2');
+        }
+        
+      });
+    }
+  }, this);
+
+  self.enableMarker = function(place) { // rename the parameter item, give it a more descriptive name
+   if (place.marker.getAnimation() !== null) {
+            place.marker.setAnimation(null);
+            place.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
           } else {
-          	item.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png');
-            item.marker.setAnimation(google.maps.Animation.BOUNCE);
+            place.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
+            place.marker.setAnimation(google.maps.Animation.BOUNCE);
           };
+        }
+  
+  //item.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
     //console.log("click");
     //console.log(item);
     //console.log(item.marker);
     //item.marker.setAnimation(google.maps.Animation.BOUNCE);
     // activate the marker (bounce/ color change, open info window)
-  };
+  //};
 
   // list view item and map marker filter
   // first, focus on filtering the list view items
@@ -73,15 +104,7 @@ var viewModel = function(map,locationList) {
   self.visiblePlaces.push(place);
   });
   
-  Query = ko.observable('');
-
-  self.searchResults = ko.computed(function() {
-    var q = Query();
-    return viewModel.visiblePlaces.filter(function(i) {
-      return i.name.toLowerCase().indexOf(q) >= 0;
-    });
-  });
-
+  
 };
 
 // cria o mapa
