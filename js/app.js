@@ -44,15 +44,13 @@ var viewModel = function(map,locationList) {
 
   });
 
-
-
   this.filter = ko.observable();
 
   // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
   this.results = ko.computed(function() {
     var filter = this.filter();
     if(!filter) {
-      self.allPlaces;      
+      //self.allPlaces;      
       return this.places;
     } else {
       return ko.utils.arrayFilter(self.allPlaces, function(place) {
@@ -128,3 +126,4 @@ var locationList = [
 // ajax requests
 // choose a third party api
 // try the third part api ajax requests in a stand alone version first (open a mini project)
+
