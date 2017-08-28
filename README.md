@@ -13,3 +13,13 @@ In order to run the application we need to open index.html in a web browser (ex.
 To check the Java Script code used, we can find it in: 
 
 \js\app.js
+
+The external applications used for this project are:
+
+- Google Maps JavaScript API
+https://developers.google.com/maps/documentation/javascript/?hl=pt
+
+- Open Weather Map
+https://openweathermap.org/api
+
+
