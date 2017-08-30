@@ -15,7 +15,6 @@ var viewModel = function(map,locationList) {
     this.contentString = dataObj.contentString;
   }
 
-
   self.allPlaces.forEach(function(place) {
     var markerOptions = {
       map: self.googleMap,
@@ -23,7 +22,6 @@ var viewModel = function(map,locationList) {
       animation: google.maps.Animation.DROP,
       icon: 'http://maps.google.com/mapfiles/ms/icons/red-dot.png',
     };
-   // console.log(place);
 
     place.marker = new google.maps.Marker(markerOptions);
     
@@ -45,28 +43,16 @@ var viewModel = function(map,locationList) {
 
   });
 
-  this.filter = ko.observable();
+  this.filter = ko.observable('');
 
   // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
   this.results = ko.computed(function() {
     var filter = this.filter();
-    if(!filter) {
-      //self.allPlaces;      
-      return this.places;
-    } else {
       return ko.utils.arrayFilter(self.allPlaces, function(place) {
-        if(place.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1) {
-          console.log('1');
-          //showFilteredMarker(place);
-          console.log(place.marker);
-          return place;
-        } else {
-          //hideFilteredMarker(place);
-          console.log('2');
-        }
-        
+        var match = place.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1; 
+          place.marker.setVisible(match);
+          return match;      
       });
-    }
   }, this);
 
   self.enableMarker = function(place) { // rename the parameter item, give it a more descriptive name
@@ -78,24 +64,6 @@ var viewModel = function(map,locationList) {
             place.marker.setAnimation(google.maps.Animation.BOUNCE);
           };
         }
-  
-  //item.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
-    //console.log("click");
-    //console.log(item);
-    //console.log(item.marker);
-    //item.marker.setAnimation(google.maps.Animation.BOUNCE);
-    // activate the marker (bounce/ color change, open info window)
-  //};
-
-  // list view item and map marker filter
-  // first, focus on filtering the list view items
-  // ko computed observable
-  // http://knockoutjs.com/documentation/computedObservables.html
-  // ko.utils.arrayFilter
-  // http://www.knockmeout.net/2011/04/utility-functions-in-knockoutjs.html
-  // https://opensoul.org/2011/06/23/live-search-with-knockoutjs/
-  // String indexOf method
-  // https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf
 
   self.visiblePlaces = ko.observableArray();
 
@@ -108,10 +76,11 @@ var viewModel = function(map,locationList) {
 
 // cria o mapa
 function createMap() {
-    return new google.maps.Map(document.getElementById('map'), {
+    var googleMap = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 40.166294, lng: -96.389016 },
         zoom: 4
     });
+    ko.applyBindings(new viewModel(googleMap,locationList));
 }
 // função externa que mostra o tempo
 function weather(lat, lon) {
@@ -125,7 +94,7 @@ function weather(lat, lon) {
   $.getJSON(weatherAPIUrl, function(data){
     description = data.weather[0].main;
     temperature = data.main.temp;
-
+    // knockout binding to update the DOM
     $weatherElem.text('Description: '+description+' '+'Temperature: '+temperature);
 });
 }
@@ -134,13 +103,8 @@ var locationList = [
   { name: 'New York', latLng: { lat: 40.786998, lng: -73.975664 }, contentString: '<p>teste - New York</p>'},
   { name: 'New Xpto', latLng: { lat: 42.786998, lng: -77.975664 }, contentString: '<p>teste - New Xpto</p>' },
   { name: 'San Francisco', latLng: { lat: 37.763061, lng: -122.431935 }, contentString: '<p>teste - San Francisco</p>' },
-  { name: 'Los Angeles', latLng: { lat: 34.079078, lng: -118.242818 }, contentString: '<p>teste - Los Angeles</p>' }
+  { name: 'Los Angeles', latLng: { lat: 34.079078, lng: -118.242818 }, contentString: '<p>teste - Los Angeles</p>' },
+  { name: 'New Xpto2', latLng: { lat: 34.1002, lng: -117.242818 }, contentString: '<p>teste - New Xpto2</p>' }
   ];
   
-  var googleMap = createMap();
-  ko.applyBindings(new viewModel(googleMap,locationList));
-
-// ajax requests
-// choose a third party api
-// try the third part api ajax requests in a stand alone version first (open a mini project)
 
