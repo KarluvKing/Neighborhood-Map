@@ -76,8 +76,8 @@ function setTimer(marker) {
 
 function createMap() {
     var googleMap = new google.maps.Map(document.getElementById('map'), {
-        center: { lat: 40.166294, lng: -96.389016 },
-        zoom: 4
+        center: { lat: 40.473642, lng: 26.132164 },
+        zoom: 3
     });
     ko.applyBindings(new viewModel(googleMap,locationList));
 }
@@ -93,15 +93,15 @@ function weather(lat, lon) {
   $.getJSON(weatherAPIUrl, function(data){
     description = data.weather[0].main;
     temperature = data.main.temp;
-    // knockout binding to update the DOM
+
     $weatherElem.text('Description: '+description+' '+'Temperature: '+temperature);
 });
 }
 
 var locationList = [
-  { name: 'New York', latLng: { lat: 40.786998, lng: -73.975664 }, contentString: '<p>teste - New York</p>'},
-  { name: 'New Xpto', latLng: { lat: 42.786998, lng: -77.975664 }, contentString: '<p>teste - New Xpto</p>' },
-  { name: 'San Francisco', latLng: { lat: 37.763061, lng: -122.431935 }, contentString: '<p>teste - San Francisco</p>' },
-  { name: 'Los Angeles', latLng: { lat: 34.079078, lng: -118.242818 }, contentString: '<p>teste - Los Angeles</p>' },
-  { name: 'New Xpto2', latLng: { lat: 34.1002, lng: -117.242818 }, contentString: '<p>teste - New Xpto2</p>' }
+  { name: 'Lisboa', latLng: { lat: 38.728877, lng: -9.139606 }, contentString: 'Lisbon - Portugal'},
+  { name: 'Roma', latLng: { lat: 41.900276, lng: 12.500969 }, contentString: 'Rome - Italy' },
+  { name: 'Prague', latLng: { lat: 50.075452, lng: 14.432657 }, contentString: 'Prague - Checz Republic' },
+  { name: 'Budapeste', latLng: { lat: 47.574433, lng: 19.061405 }, contentString: 'Budapeste - Hungary' },
+  { name: 'Bucareste', latLng: { lat: 44.473642, lng: 26.132164 }, contentString: 'Bucareste - Romania' }
   ];
