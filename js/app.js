@@ -30,22 +30,15 @@ var viewModel = function(map,locationList) {
         });
 
     place.marker.addListener('click', function() {
-          if (place.marker.getAnimation() !== null) {
-            place.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png');
-            place.marker.setAnimation(null);
-          } else {
             infowindow.open(map, place.marker);
             weather(place.latLng.lat, place.latLng.lng);
             place.marker.setAnimation(google.maps.Animation.BOUNCE);
-            place.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
-          };
+            setTimer(place.marker);
         });
-
   });
 
   this.filter = ko.observable('');
 
-  // http://knockoutjs.com/documentation/click-binding.html#note-1-passing-a-current-item-as-a-parameter-to-your-handler-function
   this.results = ko.computed(function() {
     var filter = this.filter();
       return ko.utils.arrayFilter(self.allPlaces, function(place) {
@@ -71,10 +64,16 @@ var viewModel = function(map,locationList) {
   self.visiblePlaces.push(place);
   });
   
-  
 };
 
-// cria o mapa
+// This function will automatically stops marker animation
+// After 3 seconds
+function setTimer(marker) {
+  setTimeout(function() {
+    marker.setAnimation(null);
+  }, 3000);
+}
+
 function createMap() {
     var googleMap = new google.maps.Map(document.getElementById('map'), {
         center: { lat: 40.166294, lng: -96.389016 },
@@ -106,5 +105,3 @@ var locationList = [
   { name: 'Los Angeles', latLng: { lat: 34.079078, lng: -118.242818 }, contentString: '<p>teste - Los Angeles</p>' },
   { name: 'New Xpto2', latLng: { lat: 34.1002, lng: -117.242818 }, contentString: '<p>teste - New Xpto2</p>' }
   ];
-  
-

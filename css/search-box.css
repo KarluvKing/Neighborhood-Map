@@ -1,17 +1,10 @@
-* {
-  box-sizing: border-box;
-}
 
 .h1, h1 {
     font-size: 2.5rem;
-    color: white;
+    color: black;
 }
 
-body {
-  background: #222;
-  margin: 2em 10em;
-  box-sizing: border-box;
-}
+
 .searchform {
   display: block;
   margin: 0;
