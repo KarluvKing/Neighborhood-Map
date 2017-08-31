@@ -97,7 +97,6 @@ function weather(lat, lon) {
   var weatherAPIUrl = 'http://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&appid=12ff2cf419210da17035e40a33d4c590'
 
   $.getJSON(weatherAPIUrl, function(data){
-    console.log(data.name);
     description = data.weather[0].main;
     temperature = data.main.temp;
 
