@@ -59,8 +59,8 @@ var viewModel = function(map,locationList) {
             place.marker.setAnimation(google.maps.Animation.BOUNCE);
             weather(place.latLng.lat, place.latLng.lng);
             setTimer(place.marker);
-          };
-        }
+          }
+        };
 
   self.visiblePlaces = ko.observableArray();
 
@@ -92,8 +92,6 @@ function weather(lat, lon) {
   var $cityName = $('#cityName');
   var $warningElem = $('#warning');
 
-  var lat = lat;
-  var lon = lon;
   var weatherAPIUrl = 'http://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&appid=12ff2cf419210da17035e40a33d4c590'
 
   $.getJSON(weatherAPIUrl, function(data){
@@ -102,7 +100,7 @@ function weather(lat, lon) {
 
     $cityName.text(data.name);
     $weatherElem.text('Description: '+description+' '+'Temperature: '+temperature);
-})
+});
   .fail(function() {
     $warningElem.text('We regret but it is not possible to access the weather information');
   });
