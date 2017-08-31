@@ -100,7 +100,7 @@ function weather(lat, lon) {
 
     $cityName.text(data.name);
     $weatherElem.text('Description: '+description+' '+'Temperature: '+temperature);
-});
+})
   .fail(function() {
     $warningElem.text('We regret but it is not possible to access the weather information');
   });
