@@ -51,10 +51,10 @@ var viewModel = function(map,locationList) {
   self.enableMarker = function(place) { // rename the parameter item, give it a more descriptive name
    if (place.marker.getAnimation() !== null) {
             place.marker.setAnimation(null);
-            place.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/red-dot.png')
           } else {
-            place.marker.setIcon('http://maps.google.com/mapfiles/ms/icons/green-dot.png')
             place.marker.setAnimation(google.maps.Animation.BOUNCE);
+            weather(place.latLng.lat, place.latLng.lng);
+            setTimer(place.marker);
           };
         }
 
