@@ -28,6 +28,7 @@
     #weather{
     color: black;
     } 
+
     </style>
 
 </head>
@@ -65,6 +66,8 @@
                 <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Menu</a>
                 <h1>Neighborhood Map</h1>
                 <div id="map"></div>
+                </div>
+                <h2 id="warning"></h2>
                 </br>
                 <h3 id="cityName"></h3>
                 <div id="weather"></div>
@@ -92,9 +95,7 @@
     });
     </script>
 
-    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQFhH2B98QS898S1bQ5WL4IxRXzklXV1w&callback=createMap
-">
-    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDQFhH2B98QS898S1bQ5WL4IxRXzklXV1w&callback=createMap" onerror="googleError()"></script>
 
 </body>
 

@@ -88,9 +88,9 @@ function createMap() {
 
 // Show information about the weather in the city 3rd external API
 function weather(lat, lon) {
-  // var $weather = $('#weather');
   var $weatherElem = $('#weather');
   var $cityName = $('#cityName');
+  var $warningElem = $('#warning');
 
   var lat = lat;
   var lon = lon;
@@ -102,7 +102,10 @@ function weather(lat, lon) {
 
     $cityName.text(data.name);
     $weatherElem.text('Description: '+description+' '+'Temperature: '+temperature);
-});
+})
+  .fail(function() {
+    $warningElem.text('We regret but it is not possible to access the weather information');
+  });
 }
 // Location List
 var locationList = [
