@@ -50,10 +50,7 @@
                     <input type="search" id="search-box" placeholder="Search" data-bind="textInput: filter">
                 </form>
                 <div data-bind="foreach: results">
-                <!-- http://knockoutjs.com/documentation/click-binding.html -->
-                <!-- http://knockoutjs.com/documentation/binding-context.html -->
                 <li data-bind="click: $root.enableMarker">
-                <!-- <li data-bind="text: name, click: getplaceInfo"></li> -->
                     <a href="#" data-bind="text: name"></a>
                 </li>
                 </div>
@@ -67,6 +64,8 @@
                 <a href="#menu-toggle" class="btn btn-secondary" id="menu-toggle">Menu</a>
                 <h1>Neighborhood Map</h1>
                 <div id="map"></div>
+                </br>
+                <h3 id="cityName"></h3>
                 <div id="weather"></div>
             </div>
         </div>

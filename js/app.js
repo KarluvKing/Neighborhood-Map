@@ -15,6 +15,8 @@ var viewModel = function(map,locationList) {
     this.contentString = dataObj.contentString;
   }
 
+
+  // Information and configuration for the marker when the marker is clicked
   self.allPlaces.forEach(function(place) {
     var markerOptions = {
       map: self.googleMap,
@@ -37,6 +39,7 @@ var viewModel = function(map,locationList) {
         });
   });
 
+  // Filter for search function in the left side bar
   this.filter = ko.observable('');
 
   this.results = ko.computed(function() {
@@ -48,7 +51,8 @@ var viewModel = function(map,locationList) {
       });
   }, this);
 
-  self.enableMarker = function(place) { // rename the parameter item, give it a more descriptive name
+  // Enable marker with animation and show in the DOM information about the weather
+  self.enableMarker = function(place) {
    if (place.marker.getAnimation() !== null) {
             place.marker.setAnimation(null);
           } else {
@@ -67,7 +71,7 @@ var viewModel = function(map,locationList) {
 };
 
 // This function will automatically stops marker animation
-// After 3 seconds
+// after 3 seconds
 function setTimer(marker) {
   setTimeout(function() {
     marker.setAnimation(null);
@@ -81,23 +85,27 @@ function createMap() {
     });
     ko.applyBindings(new viewModel(googleMap,locationList));
 }
-// função externa que mostra o tempo
+
+// Show information about the weather in the city 3rd external API
 function weather(lat, lon) {
-  var $weather = $('#weather');
+  // var $weather = $('#weather');
   var $weatherElem = $('#weather');
+  var $cityName = $('#cityName');
 
   var lat = lat;
   var lon = lon;
   var weatherAPIUrl = 'http://api.openweathermap.org/data/2.5/weather?lat='+lat+'&lon='+lon+'&appid=12ff2cf419210da17035e40a33d4c590'
 
   $.getJSON(weatherAPIUrl, function(data){
+    console.log(data.name);
     description = data.weather[0].main;
     temperature = data.main.temp;
 
+    $cityName.text(data.name);
     $weatherElem.text('Description: '+description+' '+'Temperature: '+temperature);
 });
 }
-
+// Location List
 var locationList = [
   { name: 'Lisboa', latLng: { lat: 38.728877, lng: -9.139606 }, contentString: 'Lisbon - Portugal'},
   { name: 'Roma', latLng: { lat: 41.900276, lng: 12.500969 }, contentString: 'Rome - Italy' },
