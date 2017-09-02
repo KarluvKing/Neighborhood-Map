@@ -84,6 +84,7 @@ function createMap() {
         zoom: 3
     });
     ko.applyBindings(new viewModel(googleMap,locationList));
+    googleError();
 }
 
 // Show information about the weather in the city 3rd external API
