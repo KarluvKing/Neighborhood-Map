@@ -165,3 +165,7 @@ var locationList = [{
     contentString: 'Bucareste - Romania'
   }
 ];
+
+function googleError() {
+    alert("Couldn't load the map! Try refresh the page!");
+}
